@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    web:
+        build: ./web
+        ports:
+            -   9100:9000
+        environment: 
+            DATABASE_NAME:  demo
+            DATABASE_USER:  demo
+            DATABASE_PASS:  demo
+            DATABASE_DSN:   mysql:host=db;port=3306;dbname=demo
+            DATABASE_URL:   mysql://demo:demo@db:3306/demo    
+
+        volumes: 
+            -   /var/www/html
+    
+    db:
+        build: ./db
+        ports:
+            -   3306:3306
+        environment: 
+            MYSQL_ROOT_PASSWORD:    password
+            MYSQL_DATABASE: demo
+            MYSQL_USER: demo
+            MYSQL_PASSWORD: demo
+        command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+        volumes: 
+            -   /var/lib/mysql
+            -   /var/log/mysql
+
+    adminer:
+        build: ./adminer
+        ports:
+            -   9101:8080
+
