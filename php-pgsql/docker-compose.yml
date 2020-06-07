@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+    web:
+        build: ./web
+        ports:
+            -   9100:9000
+        environment: 
+            DATABASE_NAME:  demo
+            DATABASE_USER:  demo
+            DATABASE_PASS:  demo
+            DATABASE_DSN:   pgsql:host=db;port=5432;dbname=demo
+            DATABASE_URL:   pgsql://demo:demo@db:5432/demo    
+
+        volumes: 
+            -   /var/www/html
+    
+    db:
+        build: ./db
+        ports:
+            -   5432:5432
+        environment: 
+            POSTGRES_DB: demo
+            POSTGRES_USER: demo
+            POSTGRES_PASSWORD: demo
+        volumes: 
+            -   /var/lib/postgresql
+            -   /var/log/postgresql
+
+    adminer:
+        build: ./adminer
+        ports:
+            -   9101:8080
+
