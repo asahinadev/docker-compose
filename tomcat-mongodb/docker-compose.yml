@@ -11,7 +11,8 @@ services:
             DATABASE_PASS:  demo
             DATABASE_URL:   jdbc:mongo://demo:demo@db:27017/demo
         volumes: 
-            -   /var/www/html
+            -   /usr/local/tomcat/webapps
+            -   /usr/local/tomcat/logs
     
     db:
         build: ./db

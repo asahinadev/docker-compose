@@ -10,11 +10,11 @@ services:
             DATABASE_USER:  demo
             DATABASE_PASS:  demo
             DATABASE_URL:   jdbc:mysql://demo:demo@db:3306/demo    
-
         volumes: 
-            -   /var/www/html
-    
-    db:
+            -   /usr/local/tomcat/webapps
+            -   /usr/local/tomcat/logs
+
+            db:
         build: ./db
         ports:
             -   3306:3306

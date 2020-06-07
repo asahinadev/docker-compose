@@ -10,9 +10,9 @@ services:
             DATABASE_USER:  demo
             DATABASE_PASS:  demo
             DATABASE_URL:   jdbc:pgsql://demo:demo@db:5432/demo    
-
         volumes: 
-            -   /var/www/html
+            -   /usr/local/tomcat/webapps
+            -   /usr/local/tomcat/logs
     
     db:
         build: ./db
