@@ -9,3 +9,10 @@ RUN docker-php-ext-enable    intl
 RUN pecl install mongodb
 RUN docker-php-ext-enable mongodb 
 
+# 
+WORKDIR /usr/local/src/composer
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer
+RUN chmod +x /usr/local/bin/composer
+
+WORKDIR /var/www/html
