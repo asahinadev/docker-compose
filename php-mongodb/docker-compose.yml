@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    web:
+        build: ./web
+        ports:
+            -   9100:9000
+#        environment: 
+#            DATABASE_NAME:  demo
+#            DATABASE_USER:  demo
+#           DATABASE_PASS:  demo
+#           DATABASE_DSN:   mysql:host=db;port=3306;dbname=demo
+#           DATABASE_URL:   mysql://demo:demo@db:3306/demo    
+        volumes: 
+            -   /var/www/html
+    
+    db:
+        build: ./db
+        environment: 
+            MONGO_INITDB_DATABASE: demo
+            MONGO_INITDB_ROOT_USERNAME: demo
+            MONGO_INITDB_ROOT_PASSWORD: demo
+        ports: 
+            -   27017:27017
+        volumes: 
+            -   /data/db
+
+    express:
+        build: ./express
+        ports:
+            -   9101:8081
+        environment: 
+            ME_CONFIG_BASICAUTH_USERNAME: demo
+            ME_CONFIG_BASICAUTH_PASSWORD: demo
+            ME_CONFIG_MONGODB_SERVER: db
+#           ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+#           ME_CONFIG_MONGODB_ADMINUSERNAME: ''
+#           ME_CONFIG_MONGODB_ADMINPASSWORD: ''
+#           ME_CONFIG_MONGODB_PORT: 27017
+#           ME_CONFIG_OPTIONS_EDITORTHEME: default
+#           ME_CONFIG_REQUEST_SIZE: 100kb
+#           ME_CONFIG_SITE_BASEURL: '/'
+#           ME_CONFIG_SITE_COOKIESECRET: 'cookiesecret'
+#           ME_CONFIG_SITE_SESSIONSECRET: 'sessionsecret'
+#           ME_CONFIG_SITE_SSL_ENABLED: false
+#           ME_CONFIG_SITE_SSL_CRT_PATH: ''
+#           ME_CONFIG_SITE_SSL_KEY_PATH: ''
