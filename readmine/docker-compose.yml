@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+    db:
+        build: ./db
+        ports:
+            -   3306:3306
+        environment: 
+            TZ: Asia/Tokyo
+            MYSQL_ROOT_PASSWORD:    password
+            MYSQL_DATABASE: redmine
+            MYSQL_USER: redmine
+            MYSQL_PASSWORD: redmine
+        command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+        volumes: 
+            -   /var/lib/mysql
+            -   /var/log/mysql
+    web:
+        build: ./web
+        ports:
+            -   9100:3000
+        restart: on-failure
+        environment: 
+            TZ: Asia/Tokyo
+            REDMINE_DB_MYSQL:  db
+            REDMINE_DB_PORT: 3306
+            REDMINE_DB_DATABASE: redmine
+            REDMINE_DB_USERNAME: redmine
+            REDMINE_DB_PASSWORD: redmine
+            REDMINE_DB_ENCODING: utf8mb4
+        depends_on: 
+            - db
+        volumes: 
+            - ./web/files:/usr/src/redmine/files
+            - ./web/log:/usr/src/redmine/log
+            - ./web/plugins:/usr/src/redmine/plugins
+            - ./web/themes:/usr/src/redmine/public/themes    
+    adminer:
+        build: ./adminer
+        ports:
+            -   9101:8080
+

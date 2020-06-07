@@ -1,0 +1,9 @@
+[submodule "readmine/web/plugins/redmine_git_remote"]
+	path = readmine/web/plugins/redmine_git_remote
+	url = https://github.com/dergachev/redmine_git_remote.git
+[submodule "readmine/web/plugins/redmine_enter_cancel"]
+	path = readmine/web/plugins/redmine_enter_cancel
+	url = https://github.com/suer/redmine_enter_cancel.git
+[submodule "readmine/web/plugins/redmine_absolute_dates"]
+	path = readmine/web/plugins/redmine_absolute_dates
+	url = https://github.com/suer/redmine_absolute_dates.git
